@@ -1,0 +1,105 @@
+transpots = off
+//autoarrow = color=grey,style=dotted,dir=none
+//
+//splines=line
+////splines=polyline
+////splines=curved
+//splines=ortho
+////splines=spline
+
+%Client
+link HTTP
+
+{.
+HTTPS
+link WebSocket
+
+{.
+{.
+{.
+{. Web interface
+	
+	=CookieAuthentication
+	link< DB
+	
+	=AdminAuthorization
+	link< DB
+	link AdminUI
+
+	{. Render VMs list page
+		=ListVMs Get list of VMs
+		link< LibVirt
+
+		=Authorization
+		link< DB
+
+		{= Render VMs list
+			{- For each accessible VM
+				Get VM VNC port
+				Create encrypted WS access token: IV + Encrypted VNC addr:port + Checksum
+				link< SlidingKeys
+				add link to WS handler to the list
+			}
+			Render the list
+			goto Client
+		}
+	}
+-------------
+}
+
+{.
+	=DB
+-------------
+}
+}
+{.
+	=LibVirt
+-------------
+}
+}
+{. AdminUI
+	:AdminUI 
+	Get list of Users
+	link<_ DB
+	Get list of VMs
+	link<_ LibVirt
+	Render Permissions Edit form
+	Process Permissions Edit form
+	link>== DB
+-------------
+}
+}
+{.
+{. websocket
+	:WebSocket
+	Decrypt auth token
+	link<_ SlidingKeys
+	Bind websocket to TCP
+	Start the session
+-------------
+}
+
+
+{. SlidingKeys
+	{
+	:SlidingLoop
+	set Key2&nbsp;=&nbsp;Key1
+	generate new random Key1
+	store updated keys to storage
+	link>== SlidingKeys
+	sleep for some time
+	goto SlidingLoop
+	---------
+	}
+	=SlidingKeys Keys storage
+-------------
+}
+}
+{. HTTP
+	=HTTP
+	Redirect to HTTPS
+	goto Client
+-------------
+}
+}
+

@@ -1,0 +1,278 @@
+digraph untitled {
+fontname="Courier-New";
+
+
+ subgraph cluster_0 {
+ label="";
+ penwidth=0;
+
+ fontname="Courier";
+
+ node [shape=circle];
+
+ node1 [label="Client", shape=ellipse, penwidth=1, style=solid, fontname="Courier"];
+
+  subgraph cluster_2 {
+  label="";
+  penwidth=1; style=dotted;
+
+  fontname="Courier";
+
+  node [shape=circle];
+
+  node3 [label="HTTPS", shape=box, penwidth=1, style=solid, fontname="Courier"];
+
+   subgraph cluster_4 {
+   label="";
+   penwidth=1; style=dotted;
+
+   fontname="Courier";
+
+   node [shape=circle];
+
+
+    subgraph cluster_5 {
+    label="";
+    penwidth=1; style=dotted;
+
+    fontname="Courier";
+
+    node [shape=circle];
+
+
+     subgraph cluster_6 {
+     label="";
+     penwidth=1; style=dotted;
+
+     fontname="Courier";
+
+     node [shape=circle];
+
+
+      subgraph cluster_7 {
+      label="Web\ninterface";
+      penwidth=1; style=dotted;
+
+      fontname="Courier";
+
+      node [shape=circle];
+
+      node8 [label="CookieAuthentication", shape=box, penwidth=1, style=solid, fontname="Courier"];
+      node9 [label="AdminAuthorization", shape=box, penwidth=1, style=solid, fontname="Courier"];
+
+       subgraph cluster_10 {
+       label="Render\nVMs list\npage";
+       penwidth=1; style=dotted;
+
+       fontname="Courier";
+
+       node [shape=circle];
+
+       node11 [label="Get\nlist of\nVMs", shape=box, penwidth=1, style=solid, fontname="Courier"];
+       node12 [label="Authorization", shape=box, penwidth=1, style=solid, fontname="Courier"];
+
+        subgraph cluster_13 {
+        label="Render\nVMs\nlist";
+        penwidth=1; style=solid;
+
+        fontname="Courier";
+
+        node [shape=circle];
+
+
+         subgraph cluster_14 {
+         label="For each\naccessible\nVM";
+         penwidth=1; style=dashed;
+
+         fontname="Courier";
+
+         node [shape=circle];
+
+         node15 [label="Get VM\nVNC\nport", shape=box, penwidth=1, style=solid, fontname="Courier"];
+         node16 [label="Create encrypted\nWS access token:\nIV + Encrypted\nVNC addr:port +\nChecksum", shape=box, penwidth=1, style=solid, fontname="Courier"];
+         node17 [label="add link\nto WS\nhandler to\nthe list", shape=box, penwidth=1, style=solid, fontname="Courier"];
+         }
+
+        node18 [label="Render\nthe\nlist", shape=box, penwidth=1, style=solid, fontname="Courier"];
+        }
+
+       }
+
+      }
+
+
+      subgraph cluster_19 {
+      label="";
+      penwidth=1; style=dotted;
+
+      fontname="Courier";
+
+      node [shape=circle];
+
+      node20 [label="DB", shape=box, penwidth=1, style=solid, fontname="Courier"];
+      }
+
+     }
+
+
+     subgraph cluster_21 {
+     label="";
+     penwidth=1; style=dotted;
+
+     fontname="Courier";
+
+     node [shape=circle];
+
+     node22 [label="LibVirt", shape=box, penwidth=1, style=solid, fontname="Courier"];
+     }
+
+    }
+
+
+    subgraph cluster_23 {
+    label="AdminUI";
+    penwidth=1; style=dotted;
+
+    fontname="Courier";
+
+    node [shape=circle];
+
+    node24 [label="Get\nlist of\nUsers", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    node25 [label="Get\nlist of\nVMs", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    node26 [label="Render\nPermissions\nEdit form", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    node27 [label="Process\nPermissions\nEdit form", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    }
+
+   }
+
+
+   subgraph cluster_28 {
+   label="";
+   penwidth=1; style=dotted;
+
+   fontname="Courier";
+
+   node [shape=circle];
+
+
+    subgraph cluster_29 {
+    label="websocket";
+    penwidth=1; style=dotted;
+
+    fontname="Courier";
+
+    node [shape=circle];
+
+    node30 [label="Decrypt\nauth\ntoken", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    node31 [label="Bind\nwebsocket\nto TCP", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    node32 [label="Start\nthe\nsession", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    }
+
+
+    subgraph cluster_33 {
+    label="SlidingKeys";
+    penwidth=1; style=dotted;
+
+    fontname="Courier";
+
+    node [shape=circle];
+
+
+     subgraph cluster_34 {
+     label="";
+     penwidth=0;
+
+     fontname="Courier";
+
+     node [shape=circle];
+
+     node35 [label="set\nKey2&nbsp;=&nbsp;Key1", shape=box, penwidth=1, style=solid, fontname="Courier"];
+     node36 [label="generate\nnew random\nKey1", shape=box, penwidth=1, style=solid, fontname="Courier"];
+     node37 [label="store\nupdated keys\nto storage", shape=box, penwidth=1, style=solid, fontname="Courier"];
+     node38 [label="sleep\nfor some\ntime", shape=box, penwidth=1, style=solid, fontname="Courier"];
+     }
+
+    node39 [label="Keys\nstorage", shape=box, penwidth=1, style=solid, fontname="Courier"];
+    }
+
+   }
+
+
+   subgraph cluster_40 {
+   label="HTTP";
+   penwidth=1; style=dotted;
+
+   fontname="Courier";
+
+   node [shape=circle];
+
+   node41 [label="HTTP", shape=box, penwidth=1, style=solid, fontname="Courier"];
+   node42 [label="Redirect\nto HTTPS", shape=box, penwidth=1, style=solid, fontname="Courier"];
+   }
+
+  }
+
+ }
+
+
+node [shape=circle];
+
+edge [fontname="Courier"];
+
+edge [weight=1000];
+
+node1:s -> node3:n ;
+
+node3:s -> node8:n ;
+
+node8:s -> node9:n ;
+
+node9:s -> node11:n ;
+
+node11:s -> node12:n ;
+
+node12:s -> node15:n ;
+
+node15:s -> node16:n ;
+
+node16:s -> node17:n ;
+
+node17:s -> node18:n ;
+
+node24:s -> node25:n ;
+
+node25:s -> node26:n ;
+
+node26:s -> node27:n ;
+
+node30:s -> node31:n ;
+
+node31:s -> node32:n ;
+
+node35:s -> node36:n ;
+
+node36:s -> node37:n ;
+
+node37:s -> node38:n ;
+
+node41:s -> node42:n ;
+
+edge [weight=500, color=navy];
+
+node1 -> node41 [taillabel="", weight=150, color=navy, constraint=true, dir=forward, minlen=1, penwidth=1, style=solid];
+node3 -> node30 [taillabel="", weight=150, color=navy, constraint=true, dir=forward, minlen=1, penwidth=1, style=solid];
+node8 -> node20 [taillabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node9 -> node20 [taillabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node9 -> node24 [taillabel="", weight=150, color=navy, constraint=true, dir=forward, minlen=1, penwidth=1, style=solid];
+node11 -> node22 [taillabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node12 -> node20 [taillabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node16 -> node39 [taillabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node1 -> node18 [headlabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node20 -> node24 [headlabel="", weight=150, color=navy, constraint=false, dir=forward, minlen=1, penwidth=1, style=solid];
+node22 -> node25 [headlabel="", weight=150, color=navy, constraint=false, dir=forward, minlen=1, penwidth=1, style=solid];
+node20 -> node27 [headlabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=2, style=solid];
+node30 -> node39 [taillabel="", weight=150, color=navy, constraint=false, dir=back, minlen=1, penwidth=1, style=solid];
+node37 -> node39 [taillabel="", weight=150, color=navy, constraint=true, dir=forward, minlen=1, penwidth=2, style=solid];
+node35 -> node38 [headlabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+node1 -> node42 [headlabel="", weight=150, color=navy, constraint=true, dir=back, minlen=1, penwidth=1, style=solid];
+}
