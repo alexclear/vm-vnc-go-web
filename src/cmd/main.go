@@ -27,7 +27,8 @@ func main() {
 
 	go func() {
 		log.Debugf("Serving...")
-		err = http.ListenAndServeTLS(cfg.BindHTTPS, cfg.Certfile, cfg.Keyfile, nil)
+		// err = http.ListenAndServeTLS(cfg.BindHTTPS, cfg.Certfile, cfg.Keyfile, nil)
+		err = http.ListenAndServe(cfg.BindHTTPS, nil)
 		if err != nil {
 			log.Fatal("ListenAndServeTLS: ", err)
 		}
