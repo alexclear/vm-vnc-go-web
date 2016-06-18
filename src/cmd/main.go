@@ -7,6 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/yaml.v2"
 )
 
@@ -24,6 +25,8 @@ func main() {
 	}
 
 	spew.Printf("%#+v\n%#+v\n", commandLineCfg, cfg)
+
+	http.Handle("/metrics", prometheus.Handler())
 
 	go func() {
 		log.Debugf("Serving...")
