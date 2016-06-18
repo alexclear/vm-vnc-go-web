@@ -1,15 +1,36 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"os/signal"
 
 	log "github.com/Sirupsen/logrus"
+
+	"runtime/pprof"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/yaml.v2"
 )
+
+func sighandler() {
+	// Set up channel on which to send signal notifications.
+	// We must use a buffered channel or risk missing the signal
+	// if we're not ready to receive when the signal is sent.
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+
+	// Block until a signal is received.
+	s := <-c
+	fmt.Println("Got signal:", s)
+	if cfg.Debug {
+		pprof.StopCPUProfile()
+	}
+	os.Exit(0)
+}
 
 func main() {
 	commandLineCfg.Parse()
@@ -25,6 +46,17 @@ func main() {
 	}
 
 	spew.Printf("%#+v\n%#+v\n", commandLineCfg, cfg)
+
+	if cfg.Debug {
+		f, err := os.Create("server-go.prof")
+		if err != nil {
+			log.Fatal("Error enabling CPU profiler: ", err)
+		}
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
+
+	go sighandler()
 
 	http.Handle("/metrics", prometheus.Handler())
 
