@@ -1,0 +1,2 @@
+bind_http: ":8080"
+bind_https: ":8443"
