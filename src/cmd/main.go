@@ -32,6 +32,10 @@ func sighandler() {
 	os.Exit(0)
 }
 
+func httpHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello, world!"))
+}
+
 func main() {
 	commandLineCfg.Parse()
 
@@ -59,6 +63,7 @@ func main() {
 	go sighandler()
 
 	http.Handle("/metrics", prometheus.Handler())
+	http.HandleFunc("/", httpHandler)
 
 	go func() {
 		log.Debugf("Serving...")
